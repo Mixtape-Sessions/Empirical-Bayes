@@ -1,0 +1,222 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 0
+\use_package mhchem 1
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\notefontcolor #000000
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Subsection*
+Empirical Bayes Mixtape Session, Coding Lab 3: Classifying Firm-level Discrimina
+tion
+\end_layout
+
+\begin_layout Standard
+This coding lab uses the data from the employment discrimination experiment
+ of Kline, Rose and Walters (2022) to conduct an empirical Bayes multiple
+ testing analysis.
+ The objective of the analysis is to determine which firms can be classified
+ as discriminating against Black applicants while controlling the False
+ Discovery Rate (FDR).
+\end_layout
+
+\begin_layout Enumerate
+Replicate steps 1-4 from coding lab 2 to obtain a data set of 108 firm-specific
+ discrimination estimates 
+\begin_inset Formula $\hat{\theta}_{f}$
+\end_inset
+
+ along with standard errors 
+\begin_inset Formula $s_{f}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+For each firm, form a test statistic 
+\begin_inset Formula $z_{f}=\hat{\theta}_{f}/s_{f}$
+\end_inset
+
+, and use this statistic to compute the 
+\begin_inset Formula $p$
+\end_inset
+
+-value 
+\begin_inset Formula $p_{f}$
+\end_inset
+
+ from a one-tailed test of 
+\begin_inset Formula $H_{0}:\theta_{f}=0$
+\end_inset
+
+ vs.
+ 
+\begin_inset Formula $H_{A}:\theta_{f}>0$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Plot a histogram of the firm-specific 
+\begin_inset Formula $p$
+\end_inset
+
+-values.
+ What do you notice about this distribution?
+\end_layout
+
+\begin_layout Enumerate
+Let 
+\begin_inset Formula $\pi_{0}=\Pr[\theta_{f}=0]=\int1[\theta=0]dG(\theta)$
+\end_inset
+
+ denote the share of firms in the population that are not discriminating.
+ Use your 
+\begin_inset Formula $p$
+\end_inset
+
+-values to compute an upper bound 
+\begin_inset Formula $\hat{\pi}_{0}$
+\end_inset
+
+ on 
+\begin_inset Formula $\pi_{0}$
+\end_inset
+
+.
+ [Hint: compute the average height of the 
+\begin_inset Formula $p$
+\end_inset
+
+-value density above some threshold 
+\begin_inset Formula $\lambda$
+\end_inset
+
+.
+ You can start by setting 
+\begin_inset Formula $\lambda=0.5$
+\end_inset
+
+, though any 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ will do.] Interpret your estimated bound.
+\end_layout
+
+\begin_layout Enumerate
+Use the bound from part (8) to compute 
+\begin_inset Formula $q$
+\end_inset
+
+-values as 
+\begin_inset Formula $q_{f}=[p_{f}\hat{\pi}_{0}]/\hat{F}_{p}(p_{f})$
+\end_inset
+
+, where 
+\begin_inset Formula $\hat{F}_{p}$
+\end_inset
+
+ is the estimated CDF of 
+\begin_inset Formula $p$
+\end_inset
+
+-values.
+ Recall that rejecting all null hypotheses with 
+\begin_inset Formula $q$
+\end_inset
+
+-values below 
+\begin_inset Formula $\bar{q}$
+\end_inset
+
+ controls FDR to at most 
+\begin_inset Formula $100\bar{q}\%$
+\end_inset
+
+.
+ Limiting FDR to 5%, how many firms can you classify as discriminating against
+ Black applicants?
+\end_layout
+
+\end_body
+\end_document

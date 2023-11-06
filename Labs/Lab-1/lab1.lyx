@@ -1,0 +1,370 @@
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 0
+\use_package mhchem 1
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\use_minted 0
+\notefontcolor #000000
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 1in
+\topmargin 1in
+\rightmargin 1in
+\bottommargin 1in
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Subsection*
+\begin_inset space \qquad{}
+\end_inset
+
+Empirical Bayes Mixtape Session, Coding Lab 1: School Value-Added
+\end_layout
+
+\begin_layout Standard
+This coding lab will walk you through an example of empirical Bayes estimation
+ of school value-added based on simulated data.
+ Consider a population of students, each attending one of 
+\begin_inset Formula $J$
+\end_inset
+
+ schools.
+ The variable 
+\begin_inset Formula $D_{i}\in\{1,....,J\}$
+\end_inset
+
+ indicates the school attended by student 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ We are interested in the following constant-effects causal value-added
+ model:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Formula $Y_{i}={\displaystyle \sum_{j=1}^{J}\theta_{j}D_{ij}+\beta X_{i}+\epsilon_{i}}$
+\end_inset
+
+,
+\end_layout
+
+\begin_layout Standard
+\noindent
+where 
+\begin_inset Formula $Y_{i}$
+\end_inset
+
+ is a test score outcome for student 
+\begin_inset Formula $i$
+\end_inset
+
+, 
+\begin_inset Formula $\theta_{j}$
+\end_inset
+
+ is the causal effect of school 
+\begin_inset Formula $j$
+\end_inset
+
+ and 
+\begin_inset Formula $D_{ij}=1\{D_{i}=j\}$
+\end_inset
+
+ indicates attendance at 
+\begin_inset Formula $j$
+\end_inset
+
+, 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ is an observed control variable (e.g.
+ a lagged test score), and 
+\begin_inset Formula $\epsilon_{i}$
+\end_inset
+
+ represents unobserved determinants of students' potential outcomes and
+ is assumed to satisfy 
+\begin_inset Formula $E[X_{i}\epsilon_{i}]=E[D_{ij}\epsilon_{i}]=0\ \forall j$
+\end_inset
+
+.
+ The school-level parameters 
+\begin_inset Formula $\theta_{j}$
+\end_inset
+
+ are assumed to be drawn from a normal mixing distribution:
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Formula $\theta_{j}\sim N(\mu_{\theta},\sigma_{\theta}^{2})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\noindent
+Our goal is to learn about the parameters of the mixing distribution and
+ form accurate estimates of the individual school value-added parameters
+ 
+\begin_inset Formula $\theta_{j}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Import the data set 
+\begin_inset Quotes eld
+\end_inset
+
+vam_example_data.csv
+\begin_inset Quotes erd
+\end_inset
+
+ from the course website into a statistical software package of your choice
+ (I recommend Stata or R).
+ This data set includes observations on 
+\begin_inset Formula $Y_{i},$
+\end_inset
+
+ 
+\begin_inset Formula $D_{i}$
+\end_inset
+
+, and 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ simulated from the model above for 2,500 students, each attending one of
+ 
+\begin_inset Formula $J=50$
+\end_inset
+
+ schools.
+ Since the data were simulated from a known data generating process, it
+ also includes the true value-added of each student's school, given by 
+\begin_inset Formula $\theta_{d(i)}=\sum_{j}\theta_{j}D_{ij}$
+\end_inset
+
+, which would not be known in a real-world application.
+ Summarize the variables in this data set.
+\end_layout
+
+\begin_layout Enumerate
+Create the school dummy variables 
+\begin_inset Formula $D_{ij}$
+\end_inset
+
+.
+ Fit two value-added models by ordinary least squares (OLS):
+\end_layout
+
+\begin_deeper
+\begin_layout Enumerate
+An 
+\emph on
+uncontrolled 
+\emph default
+OLS regression of 
+\begin_inset Formula $Y_{i}$
+\end_inset
+
+ on the set of 
+\begin_inset Formula $D_{ij}$
+\end_inset
+
+'s with no constant.
+\end_layout
+
+\begin_layout Enumerate
+A 
+\emph on
+controlled 
+\emph default
+OLS regression of 
+\begin_inset Formula $Y_{i}$
+\end_inset
+
+ on the 
+\begin_inset Formula $D_{ij}$
+\end_inset
+
+'s, controlling for 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ (again with no constant).
+\end_layout
+
+\begin_layout Standard
+For each of these two models, collect the list of estimated value-added
+ coefficients 
+\begin_inset Formula $\hat{\theta}_{j}$
+\end_inset
+
+ along with their robust standard errors 
+\begin_inset Formula $s_{j}$
+\end_inset
+
+ for each school.
+ Then collapse the data down to a school-level data set with 50 observations
+ on true value-added 
+\begin_inset Formula $\theta_{j}$
+\end_inset
+
+, value-added estimates 
+\begin_inset Formula $\hat{\theta}_{j}$
+\end_inset
+
+, and standard errors 
+\begin_inset Formula $s_{j}$
+\end_inset
+
+.
+\end_layout
+
+\end_deeper
+\begin_layout Enumerate
+For each of the two value-added models, use the OLS estimates and standard
+ errors to form estimates 
+\begin_inset Formula $\hat{\mu}_{\theta}$
+\end_inset
+
+ and 
+\begin_inset Formula $\hat{\sigma}_{\theta}^{2}$
+\end_inset
+
+ of the mean and variance of value-added.
+ How do the estimated variances differ for the controlled and uncontrolled
+ models? What do you conclude from this comparison? 
+\end_layout
+
+\begin_layout Enumerate
+Focus on estimates of the controlled model for the remainder of the question.
+ Using these estimates, form linear shrinkage posteriors 
+\begin_inset Formula $\hat{\theta}_{j}^{*}=\left(\tfrac{\hat{\sigma}_{\theta}^{2}}{\hat{\sigma}_{\theta}^{2}+s_{j}^{2}}\right)\hat{\theta}_{j}+\left(\tfrac{s_{j}^{2}}{\hat{\sigma}_{\theta}^{2}+s_{j}^{2}}\right)\hat{\mu}_{\theta}$
+\end_inset
+
+.
+ Summarize your results by making a plot that includes histograms of the
+ OLS and shrunk estimates overlayed with the estimated mixing distribution
+ (i.e.
+ 
+\begin_inset Formula $N(\hat{\mu}_{\theta},\hat{\sigma}_{\theta}^{2})$
+\end_inset
+
+).
+ Compare standard deviations of the OLS estimates 
+\begin_inset Formula $\hat{\theta}_{j}$
+\end_inset
+
+, the shrunk posteriors 
+\begin_inset Formula $\hat{\theta}_{j}^{*}$
+\end_inset
+
+, the estimated mixing distribution, and the true-value-added parameters
+ 
+\begin_inset Formula $\theta_{j}$
+\end_inset
+
+.
+ Which standard deviation is biggest, and which is smallest? Provide some
+ intuition.
+\end_layout
+
+\begin_layout Enumerate
+For each school, compute the squared difference between true value-added
+ 
+\begin_inset Formula $\theta_{j}$
+\end_inset
+
+ and the OLS estimate 
+\begin_inset Formula $\hat{\theta}_{j}$
+\end_inset
+
+, as well as the squared difference between true value-added and the linear
+ shrinkage estimate 
+\begin_inset Formula $\hat{\theta}_{j}^{*}$
+\end_inset
+
+.
+ Which estimator has lower mean squared error (MSE) averaged across the
+ 50 schools in the sample? Does shrinkage cause squared error to move in
+ the same direction for all schools? Give some intuition for your results.
+\end_layout
+
+\end_body
+\end_document

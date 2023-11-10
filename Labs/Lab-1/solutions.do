@@ -15,7 +15,7 @@
 		cap set trace off
 		cap log close
 		set seed 1028
-		cd "Labs/Lab-1/"
+		/* cd "Labs/Lab-1/" */
 	
 		****Load data
 		insheet using "vam_example_data.csv", names comma clear

@@ -18,15 +18,15 @@ simulate_data <- function(
   ## Draw school-level parameters ----------------------------------------------
 
   # Student-by-school dataset
-  df = data.table::CJ(student_id = 1:n_students, school_id = 1:n_schools)
+  df = data.table::CJ(student_id = 1:n_students, D = 1:n_schools)
 
   # Value-added
   df[, 
-    theta := rnorm(1, mu_theta, sigma_theta), 
-    by = school_id
+    theta_D := rnorm(1, mu_theta, sigma_theta), 
+    by = D
   ]
   if (va_model == "lognormal") {
-    df[, theta := exp(theta)]
+    df[, theta_D := exp(theta_D)]
   }
 
   # Utility parameters
@@ -35,7 +35,7 @@ simulate_data <- function(
       delta = rnorm(1, 0, sigma_delta), 
       gamma = rnorm(1, 0, sigma_gamma)
     ), 
-    by = school_id
+    by = D
   ]
 
   ## Generate student-level data -----------------------------------------------
@@ -53,14 +53,14 @@ simulate_data <- function(
   df = df[, .SD[1], by = student_id]
 
   # Generate student outcomes
-  df[, Y := theta + beta * X + rnorm(.N, 0, sigma_y)]
+  df[, Y := theta_D + beta * X + rnorm(.N, 0, sigma_y)]
 
   ## Clean-up data and return
   df$Uj = df$delta = df$gamma = NULL
   return(df)
 }
 
-# Simulate data
+# Simulate data ----------------------------------------------------------------
 library(fixest)
 library(data.table)
 library(broom)
@@ -72,6 +72,6 @@ set.seed(1028)
 # Change:
 setwd(here::here("Labs/Lab-1"))
 
-df = simualte_data()
+df = simulate_data()
 write_csv(df, "vam_example_data.csv")
 

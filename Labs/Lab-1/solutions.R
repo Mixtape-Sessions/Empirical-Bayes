@@ -19,43 +19,43 @@ n_students = 2500
 n_schools = 50
 sigma_y = 1
 sigma_theta = 0.2
-df = read_csv("vam_example_data.csv")
+df = as.data.table(read_csv("vam_example_data.csv"))
 
 # Estimate value-added models --------------------------------------------------
 
 ### No controls ----------------------------------------------------------------
 
 est_unc = feols(
-  Y ~ 0 + i(school_id), df, vcov = "hc1"
+  Y ~ 0 + i(D), df, vcov = "hc1"
 )
 
 # Extract value-added estimates
 va_unc = as.data.table(broom::tidy(est_unc))
-va_unc = va_unc[grepl("school_id::", va_unc$term), ]
-va_unc$school_id = as.numeric(gsub("school_id::", "", va_unc$term))
+va_unc = va_unc[grepl("D::", va_unc$term), ]
+va_unc$D = as.numeric(gsub("D::", "", va_unc$term))
 
-va_unc = va_unc[, .(school_id, thetahat_unc = estimate, se_unc = std.error)]
+va_unc = va_unc[, .(D, thetahat_unc = estimate, se_unc = std.error)]
 
 ### With control for X ---------------------------------------------------------
 
 est_con = feols(
-  Y ~ 0 + i(school_id) + X, df, vcov = "hc1"
+  Y ~ 0 + i(D) + X, df, vcov = "hc1"
 )
 
 va_con = as.data.table(broom::tidy(est_con))
-va_con = va_con[grepl("school_id::", va_con$term), ]
-va_con$school_id = as.numeric(gsub("school_id::", "", va_con$term))
+va_con = va_con[grepl("D::", va_con$term), ]
+va_con$D = as.numeric(gsub("D::", "", va_con$term))
 
-va_con = va_con[, .(school_id, thetahat_con = estimate, se_con = std.error)]
+va_con = va_con[, .(D, thetahat_con = estimate, se_con = std.error)]
 
 ## Collapse to school-level ----------------------------------------------------
 
 # Get number of students and true value added for each school
-school_va = df[, .(N = .N, theta = theta[1]), by = "school_id"]
+school_va = df[, .(N = .N, theta = theta_D[1]), by = "D"]
 
 # Merge in estimates
-school_va = merge(school_va, va_unc, by = "school_id")
-school_va = merge(school_va, va_con, by = "school_id")
+school_va = merge(school_va, va_unc, by = "D")
+school_va = merge(school_va, va_con, by = "D")
 
 ## Estimate hyperparameters for each model -------------------------------------
 

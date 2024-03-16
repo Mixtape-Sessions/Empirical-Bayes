@@ -1,4 +1,4 @@
-<img src="img/banner.png" alt="Mixtape Sessions Banner" width="100%"> 
+<img src="https://raw.githubusercontent.com/Mixtape-Sessions/Empirical-Bayes/main/img/banner.png" alt="Mixtape Sessions Banner" width="100%"> 
 
 ## Course Description
 

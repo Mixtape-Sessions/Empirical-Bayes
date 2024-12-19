@@ -1,6 +1,6 @@
 # Coding Lab 1: School Value-Added
 
-[[PDF of Instructions](https://github.com/Mixtape-Sessions/Empirical-Bayes/raw/main/Lab/Lab-1/lab1.pdf)]
+[[PDF of Instructions](https://nbviewer.org/github/Mixtape-Sessions/Empirical-Bayes/raw/main/Lab/Lab-1/lab1.pdf)]
 
 This coding lab will walk you through an example of empirical Bayes estimation of school value-added based on simulated data. Consider a population of students, each attending one of $J$ schools. The variable $D_{i} \in \{1,....,J\}$ indicates the school attended by student $i$. We are interested in the following constant-effects causal value-added model:
 $$

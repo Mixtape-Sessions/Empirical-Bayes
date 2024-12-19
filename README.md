@@ -1,6 +1,6 @@
 <img src="https://raw.githubusercontent.com/Mixtape-Sessions/Empirical-Bayes/main/img/banner.png" alt="Mixtape Sessions Banner" width="100%"> 
 
-## Course Description
+## About
 
 Applied microeconomic research increasingly focuses on applications involving large numbers of unit-specific parameters. Examples include studies of school, teacher, and physician quality; neighborhood effects on economic mobility; firm effects on wages; employer-specific labor market discrimination; and individualized treatment effect predictions and policy recommendations. Empirical Bayes methods offer powerful tools for summarizing heterogeneity, estimating individual effects, and making decisions in these settings. This session will cover theory and applications of empirical Bayes methods, with an emphasis on developing skills to deploy these methods in realistic applications. Topics will include methods for quantifying variation in effects, empirical Bayes shrinkage, connections to machine learning methods, and large-scale inference tools for multiple testing and decision-making. By the end of the course, participants will be equipped to utilize these methods in their own research or business applications
 
@@ -9,7 +9,7 @@ Applied microeconomic research increasingly focuses on applications involving la
 ### Day 1
 
 - Lecture: Empirical Bayes framework and recipe, linear shrinkage, James/Stein theorem
-- Lecture: ombining estimators, EB and regression, EB decision rules, connections to machine learning, EB vs. full Bayes
+- Lecture: Combining estimators, EB and regression, EB decision rules, connections to machine learning, EB vs. full Bayes
 - Coding lab 1: School value-added
 
 ### Day 2 
@@ -27,7 +27,7 @@ Applied microeconomic research increasingly focuses on applications involving la
 
 ## Slides
 
-- [Empirical Bayes and Large Scale Inference Slides](https://github.com/Mixtape-Sessions/Empirical-Bayes/raw/main/Slides/mixtape_EB_slides.pdf)
+- [Empirical Bayes and Large Scale Inference Slides](https://nbviewer.org/github/Mixtape-Sessions/Empirical-Bayes/raw/main/Slides/mixtape_EB_slides.pdf)
 
 ## Coding LAbs
 

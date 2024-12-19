@@ -1,6 +1,6 @@
 # Coding Lab 3: Classifying Firm-level Discrimination
 
-[[PDF of Instructions](https://github.com/Mixtape-Sessions/Empirical-Bayes/raw/main/Lab/Lab-3/lab3.pdf)]
+[[PDF of Instructions](https://nbviewer.org/github/Mixtape-Sessions/Empirical-Bayes/raw/main/Lab/Lab-3/lab3.pdf)]
 
 This coding lab uses the data from the employment discrimination experiment of Kline, Rose and Walters (2022) to conduct an empirical Bayes multiple testing analysis. The objective of the analysis is to determine which firms can be classified as discriminating against Black applicants while controlling the False Discovery Rate (FDR).
 

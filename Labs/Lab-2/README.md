@@ -1,6 +1,6 @@
 # Coding Lab 2: Labor Market Discrimination 
 
-[[PDF of Instructions](https://github.com/Mixtape-Sessions/Empirical-Bayes/raw/main/Lab/Lab-2/lab2.pdf)]
+[[PDF of Instructions](https://nbviewer.org/github/Mixtape-Sessions/Empirical-Bayes/raw/main/Lab/Lab-2/lab2.pdf)]
 
 This coding lab will walk you through an empirical Bayes analysis of employer heterogeneity in labor market discrimination using data from the field experiment of Kline, Rose and Walters (2022). This experiment submitted 83,643 fictitious applications to 11,114 real job vacancies within 108 Fortune 500 firms. Each application was randomly assigned a distinctively-white or distinctively-Black name, stratified by job so that each vacancy received 4 white and 4 Black applications (though a few vacancies closed before all 8 applications could be sent). The key outcome is whether the application received a callback from the employer within 30 days.
 
